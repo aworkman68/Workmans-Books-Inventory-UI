@@ -2,7 +2,7 @@
 
 A planned business management application for **Workman's Books**, supporting the cataloging and sale of rare, vintage, and out-of-print books and related collectibles through retail sales and auctions.
 
-> **Project status — Requirements approved; design in progress.** The Software Requirements Specification (SRS) **Version 2.0** is the approved business-requirements baseline. Database architecture and schema design are the next phase. **The application has not yet been implemented.** Features described below are planned, not available for use.
+> **Project status — Requirements v2.0 approved; customer decisions Q1–127 owner-confirmed (20 October 2026); ERD/schema pending.** The Software Requirements Specification (SRS) **Version 2.0** is the approved business-requirements baseline. Database architecture and schema design are the next phase. **The application has not yet been implemented.** Features described below are planned, not available for use.
 
 ## Project goals
 
@@ -22,14 +22,6 @@ Provide a centralized, Windows-oriented workflow for inventory, customer and con
 
 All functionality remains subject to the approved SRS and subsequent technical design decisions.
 
-## Documentation
-
-The authoritative requirements document is:
-
-- [Software Requirements Specification — Version 2.0](docs/requirements/SOFTWARE_REQUIREMENTS.md)
-
-The SRS records approved business requirements, proposed architecture, open dependencies, and the approval gates for subsequent work. Git history preserves previous document revisions.
-
 ## Proposed technology architecture
 
 | Area                | Proposed approach            | Status                                                  |
@@ -42,32 +34,24 @@ The SRS records approved business requirements, proposed architecture, open depe
 
 External services under consideration include **Gmail API**, **iCollector**, **Stamps.com**, **PayPal**, **Square**, and the Workman's Books retail website. API support, permissions, costs, and provider policies must be validated before implementation. Proposed payment surcharges are **not approved for activation** until applicable legal, network, tax, and provider requirements have been checked.
 
-## Planned repository organization
+## Documentation
 
-```text
-Workmans-Books-Inventory-UI/
-├── README.md
-├── CHANGELOG.md                 # When development begins
-├── docs/
-│   ├── requirements/
-│   │   └── SOFTWARE_REQUIREMENTS.md
-│   ├── architecture/             # Future architecture and schema documents
-│   └── decisions/                # Future architecture decision records
-├── frontend/                     # Future application code
-├── backend/                      # Future service code
-└── .gitignore                    # Create when tooling is selected
-```
+Project documentation (proposed repository paths):
 
-Only `README.md` and `docs/requirements/SOFTWARE_REQUIREMENTS.md` are provided at this stage. The other paths show a suggested future structure; they do not imply working code exists.
+- [Software Requirements Specification — Version 2.0 baseline + confirmed customer-design addendum](docs/requirements/SOFTWARE_REQUIREMENTS.md)
+- [Customer Database Master Decision Log — Questions 1–127](docs/decisions/CUSTOMER_DATABASE_MASTER_DECISION_LOG.md)
+
+The SRS records approved business requirements, proposed architecture, open dependencies, and the approval gates for subsequent work. Git history preserves previous document revisions.
 
 ## Development roadmap
 
 1. **Requirements definition — Complete:** Review and approval of SRS Version 2.0.
-2. **Conceptual database design — Next:** Define business entities and relationships, beginning with Customers and Inventory.
-3. **Schema review and approval — Pending:** Produce an overall entity-relationship diagram (ERD), smaller domain-specific ERDs, and a table-by-table schema reference with keys, fields, constraints, and business rules.
-4. **Technical architecture validation — Pending:** Verify hosting, authentication, security, integrations, backup/recovery, and deployment approach.
-5. **Implementation — Not started:** Build database and application components only after explicit design approval.
-6. **Testing and deployment — Not started:** Validate workflows, data migration, security, integration behavior, and operational recovery.
+2. **Customer design decision consolidation — Complete:** All Questions 1–127 owner-confirmed; Question 96 Option A approved. Master Decision Log and SRS addendum reconciled. This does not approve a database schema.
+3. **Conceptual database design — Next:** Review customer entities and relationships, then proceed to Inventory.
+4. **Schema review and approval — Pending:** Produce an overall entity-relationship diagram (ERD), smaller domain-specific ERDs, and a table-by-table schema reference with keys, fields, constraints, and business rules.
+5. **Technical architecture validation — Pending:** Verify hosting, authentication, security, integrations, backup/recovery, and deployment approach.
+6. **Implementation — Not started:** Build database and application components only after explicit design approval.
+7. **Testing and deployment — Not started:** Validate workflows, data migration, security, integration behavior, and operational recovery.
 
 ## Design and implementation guardrails
 
@@ -77,10 +61,20 @@ Only `README.md` and `docs/requirements/SOFTWARE_REQUIREMENTS.md` are provided a
 - Keep proposed technical choices separate from approved business behavior until feasibility and compliance are verified.
 - Use version-controlled documentation to record approved changes and open decisions.
 
+## Current customer-design checkpoints
+
+- Permanent customer codes: five uppercase letters plus `01`–`99`, never reused; internal numeric IDs are separate.
+- Multiple roles, contact methods, relationships, history, audit and customer imports/exports are planned.
+- Certificate documents use Dropbox references and version/recovery capabilities; central database backup/restore remains to be designed.
+- ERD design must reconcile active-only role/tag/relationship uniqueness, historical address snapshots, certificate usage audit, and Dropbox reference integrity.
+- Certificate filename `CustomerNumber` is not yet mapped to an approved database identifier; clarify before physical schema design.
+- Q96 is approved: block duplicate active relationships in either direction for the same relationship type, while allowing distinct types. Q128 remains on hold pending owner direction after ERD/schema review.
+- No SQL tables, integrations or application functionality have been implemented by these documentation updates.
+
 ## Repository status
 
 This repository currently serves as the project planning and design workspace. Setup, build, run, and deployment instructions will be added when working application code exists.
 
 ## License
 
-No license has been selected. All rights are reserved unless and until the owner chooses a license.
+No license is stated here. Refer to a repository `LICENSE` file if one is added.

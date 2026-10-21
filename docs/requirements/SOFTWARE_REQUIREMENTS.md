@@ -1,6 +1,6 @@
 # Workman's Books
 
-**Software Requirements Specification · Version 2.0 · 16 October 2026 · Approved requirements baseline**
+**Software Requirements Specification · Version 2.0 approved baseline + owner-confirmed customer-design addendum (Q1–127), 20 October 2026 · Schema approval pending**
 
 Consolidated requirements baseline approved by the owner through the Section 19–27 review on 16 October 2026. This revision integrates approved additions into the original subject sections. Technical architecture, database schema, and implementation remain subject to separate review and approval.
 
@@ -237,6 +237,40 @@ Prefer normalized relationships, durable immutable transaction snapshots, clear 
 
 - **Schema deliverables:** Produce an overall visual entity-relationship diagram (ERD), smaller ERDs by business area, and a detailed table-by-table reference documenting fields, types, primary/foreign keys, relationships, constraints, and business rules. These are design deliverables requiring owner approval, not yet approved physical tables.
 
+## Customer database design decisions — October 2026 review addendum
+
+**Review status:** All 127 customer decisions confirmed by owner on 20 October 2026. This addendum supplements, but does not replace, the approved 16 October 2026 SRS v2.0 baseline. The companion `docs/decisions/CUSTOMER_DATABASE_MASTER_DECISION_LOG.md` records customer design Questions 1–127, their source and review status. The uploaded Q1–96 transcript is the source for the earlier decisions; Q97–127 were recorded in the continuation. Q96 was unanswered in the uploaded Word source and subsequently approved by the owner as Option A.
+
+### Customer identity and structure
+
+- One customer may hold multiple independent roles (buyer, consignor, inventory source); support individual and business customers, business contact persons, multiple addresses, emails and phone numbers.
+- Use an internal numeric `customer_id` primary key distinct from a permanent unique `customer_code`. Assign code only on successful save; never change or reuse it.
+- **Final approved code convention:** five uppercase letters plus a two-digit decimal suffix `01`–`99` (`^[A-Z]{5}(0[1-9]|[1-9][0-9])$`). Generate prefix from surname then given name for individuals, first five letters of business name for organizations, pad short prefixes with `X`; middle names excluded. Allow edits before initial save. Examples: `SMIJO01`, `LIJOH01`, `LIBOX01`, `WORKM01`. These final decisions supersede earlier interim suggestions in the transcript.
+- Support duplicate detection without automatic merging; administrator-only confirmed merges preserve transaction history, identifiers and audit records. Support inactive records, searchable previous names and aliases, relationships, roles, tags, notes, contact history, reminders, external IDs, communications preferences and customer documents.
+- Customer profile uses a left-side section menu; searchable/filterable customer list with configurable columns, imports and exports; account summary and activity timeline derive from associated records without duplicating financial facts. Optional profile image/logo deferred.
+
+### Tax-exemption and Dropbox certificate workflow
+
+- Maintain separate customer tax-exemption records with jurisdiction, type, certificate number, validity dates, verification/approval status, linked renewals, history and per-invoice usage. Only approved, applicable certificates affect new/unfinalized invoices; finalized invoices retain historical calculations and use explicit audited corrections.
+- Administrators manage certificates, reviews, overrides, reports, bulk imports, archival and role-specific permissions. Expiration notifications are configurable; approval, overrides and edits are audited.
+- Store certificate documents in a central Dropbox folder, referenced from the database. File naming: `CustomerNumber_TAX_CERT_Year.extension`, with `_02`, `_03` suffixes for collisions. Support PDF/JPG/PNG, document versions, authorized in-app preview/download, initial integrity verification, secure temporary failed-upload retention and retry. Rely on Dropbox's document version/recovery features for these files; **database backup and disaster recovery remain a separate unresolved technical design task**. Clarify the certificate filename `CustomerNumber` mapping during schema design; do not assume it means the immutable seven-character customer code or internal numeric ID.
+
+### Additional confirmed customer-design rules
+
+- **Q58/Q62:** Track role assignment and removal history. Enforce only one active assignment per `(customer_id, role_id)`, allowing later reassignments as new historical rows.
+- **Q63–76:** Email, phone and address information supports multiple records and history; shared contact details are allowed with duplicate warnings. Support optional address `care_of` and `address_notes`, separate billing/shipping defaults, and country-specific output formatting. Historical invoice/shipping snapshots retain actual values used.
+- **Q77–81:** Business-specific contact records, optional contact-level emails/phones and multiple communication purposes; preserve former contacts as inactive, without automatically linking the same person across employers.
+- **Q82–88:** Dated categorized notes with audit, soft-delete/restore, document/reminder links, plus searchable general profile notes; no administrator-only note visibility level.
+- **Q89–92:** Categorized administrator-configurable customer tags, Match ANY/ALL filtering, and historical assignments with active-only uniqueness.
+- **Q93–96:** Store one bidirectionally visible relationship, including reverse type names and optional effective dates. Prevent duplicate **active** relationships in either direction for the same relationship type; allow distinct relationship types and retain ended history.
+- **Q97–116:** Certificates have approval/renewal/expiry/revocation states, administrator-managed reporting/imports, immutable finalized invoice usage, explicit invoice corrections, and validation before approval. Recalculate affected unfinalized invoices on rejection/revocation.
+- **Q117–127:** Store versioned certificate documents in Dropbox with secure database references, admin permissions, collision-safe naming, app-driven uploads, pending-upload retry, initial verification, and authorized preview/download.
+
+### Approval and implementation gate
+
+- **Q96 approved:** The owner confirmed Option A on 20 October 2026. Reverse-direction duplicate active relationships are blocked, while distinct types between the same customers are allowed.
+- This addendum records detailed customer design choices; it does not approve a physical schema, specific SQL DDL, Dropbox API configuration, tax-law determination, or production changes. Validate permissions, hosting, retention, backup/restore and integrations before implementation.
+
 ## 17. Dependencies, validation, and unresolved decisions
 
 - Verify GoDaddy hosting supports the required database version, secure remote connections, transaction behavior, backup/restore, performance, and deployment model; consider alternative hosting if not.
@@ -295,9 +329,10 @@ This is a requirements baseline for review, not a finished design. Any contradic
 
 ## Appendix B. Revision history and approval status
 
-| Version | Date            | Status                               | Summary                                                                                                                                        |
-| ------- | --------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.0     | 12 October 2026 | Superseded baseline                  | Initial consolidated requirements.                                                                                                             |
-| 2.0     | 16 October 2026 | Owner-approved requirements baseline | Integrated approved review decisions from Sections 19–27 into relevant sections; established schema-documentation deliverables and RBAC roles. |
+| Version                 | Date            | Status                                 | Summary                                                                                                                                        |
+| ----------------------- | --------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.0                     | 12 October 2026 | Superseded baseline                    | Initial consolidated requirements.                                                                                                             |
+| 2.0                     | 16 October 2026 | Owner-approved requirements baseline   | Integrated approved review decisions from Sections 19–27 into relevant sections; established schema-documentation deliverables and RBAC roles. |
+| 2.0 + Customer Addendum | 20 October 2026 | Q1–127 owner-confirmed; schema pending | Reconciled customer decisions and Q96 approval without superseding the v2.0 baseline or approving SQL/implementation.                          |
 
 **Interpretation:** Explicit Version 2.0 provisions supersede conflicting Version 1.0 wording. Any remaining ambiguity must be resolved with the owner before implementation. Requested payment surcharges remain disabled pending legal, card-network, processor-contract, and tax verification.
