@@ -1,8 +1,8 @@
 # Workman's Books
 
-**Software Requirements Specification · Version 2.0 approved baseline + owner-confirmed customer-design addendum (Q1–127), 20 October 2026 · Schema approval pending**
+**Software Requirements Specification · Version 2.0 approved baseline + customer Q1–127 and logical reconciliation Findings 1–150 addenda · 27 October 2026 · Physical schema and implementation approval pending**
 
-Consolidated requirements baseline approved by the owner through the Section 19–27 review on 16 October 2026. This revision integrates approved additions into the original subject sections. Technical architecture, database schema, and implementation remain subject to separate review and approval.
+Consolidated requirements baseline approved by the owner through the Section 19–27 review on 16 October 2026. This revision retains the approved Version 2.0 business requirements and adds the owner-approved logical-design decisions through Finding 150. The 144 logical table names are an approved working inventory, **not** a completed physical schema or authorization to implement. Technical architecture and implementation remain subject to separate review and approval.
 
 ## 1. Purpose, scope, and decision status
 
@@ -10,7 +10,8 @@ Create a Windows-oriented business management application for Workman’s Books 
 
 | Approved business requirements | Items described in Sections 2–15 reflect decisions already made during planning. |
 | Proposed architecture | React/TypeScript user interface; Node.js/TypeScript services; centralized MySQL/MariaDB subject to hosting feasibility; Dropbox for media/documents. |
-| Not yet approved | Final conceptual/logical database schema, provider choice, infrastructure configuration, implementation sequencing, and deployment. |
+| Approved design progress | 150 logical reconciliation findings and a working inventory of 144 logical tables; detailed table definitions and full logical-schema sign-off remain pending. |
+| Not yet approved | Complete logical/physical schema, provider choice, infrastructure configuration, implementation sequencing, and deployment. |
 | Operating principle | Review and approve schema and architecture before coding or modifying GoDaddy/database resources. |
 
 ## 2. Application experience and navigation
@@ -210,7 +211,7 @@ Create a Windows-oriented business management application for Workman’s Books 
 
 - Provide individual accounts and **Administrator** and **Staff** roles in the initial schema, even if only one account is active at launch. Administrator has full control; Staff is restricted from sensitive administrative/financial actions such as refunds, auction reopening, and financial corrections unless specifically authorized. Enforce permissions on the backend and audit significant actions. Final permission matrix remains subject to design review.
 
-## 16. Proposed conceptual data areas — not an approved schema
+## 16. Conceptual data areas — historical candidates, reconciled against the approved working inventory
 
 | Master records | customers; addresses/contact methods; inventory_items; item-specific details; boxes; ownership history; inventory_images |
 | Auction records | auctions; auction_sessions; auction_lots; auction_lot_items; auction_lot_images; catalog versions; iCollector sync state; auction results |
@@ -218,11 +219,11 @@ Create a Windows-oriented business management application for Workman’s Books 
 | Operations | audit events; business messages; export/import batches; user preferences; saved searches/templates; integration status |
 | Local-only storage | Draft content and attachments, local technical notifications, workspace recovery |
 
-These are conceptual groupings, not a commitment to exact table names or a completed entity-relationship design.
+These are historical conceptual groupings. The approved working inventory of 144 logical table names is documented in the addendum below; it supersedes candidate names where they conflict. A completed ERD, physical definitions, and schema-wide sign-off are still pending.
 
 ### Additional conceptual entity candidates
 
-The following are **candidate** entities/relationships for schema review, not approved physical table definitions:
+The following are **historical candidate** entities/relationships for schema review, not approved physical table definitions. Refer to the Findings 1–150 addendum for the current working inventory:
 
 | Domain                 | Candidate entities or extensions                                                                                                                                                                                                                                             |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -311,6 +312,148 @@ Prefer normalized relationships, durable immutable transaction snapshots, clear 
 - All nine Version 2.0 review sections (19–27) were approved by the owner on 16 October 2026. Approval applies to business requirements and the planned design process, **not** to a logical/physical database schema, architecture deployment, API credentials, or coding.
 - Begin conceptual modeling with Customers and Inventory, review one area at a time, and obtain explicit approval before creating tables or changing production systems.
 
+## Logical schema reconciliation addendum — Findings 1–150 (27 October 2026)
+
+**Owner-approved design decisions, not an implementation authorization.** The review paused after approval of Finding 150, Option A. Findings 1–150 are approved at the decision level; 144 logical table names have been approved as a working inventory. Table-by-table columns, constraints, relationships, ERDs, physical schema, and final sign-off remain outstanding. Continue with Finding 151 only after owner acknowledgment of the checkpoint.
+
+### Working logical table inventory
+
+**Customer and application — 44:** `customers`, `customer_roles`, `customer_role_assignments`, `customer_name_history`, `customer_emails`, `customer_phones`, `customer_addresses`, `customer_address_purposes`, `customer_contacts`, `customer_phone_sms_consent_history`, `customer_relationships`, `customer_relationship_types`, `customer_notes`, `customer_note_categories`, `customer_note_revisions`, `customer_activity_revisions`, `customer_activity_types`, `customer_activity_log`, `customer_communication_preference_history`, `customer_communication_preferences`, `customer_interest_categories`, `customer_interests`, `customer_document_categories`, `customer_documents`, `customer_document_versions`, `customer_payment_terms`, `customer_tax_exemptions`, `customer_account_holds`, `customer_account_restriction_types`, `customer_account_restrictions`, `customer_financial_profiles`, `application_audit_log`, `customer_wants`, `customer_want_matches`, `customer_auction_eligibility_history`, `application_messages`, `customer_import_batches`, `customer_import_records`, `application_users`, `application_roles`, `application_user_roles`, `application_permissions`, `application_role_permissions`, `application_user_preferences`
+
+**Inventory and promotional — 37:** `inventory_items`, `inventory_acquisitions`, `inventory_ownership_history`, `inventory_box_history`, `books`, `catalogs`, `magazines`, `magazine_articles`, `inventory_images`, `inventory_item_types`, `subjects`, `inventory_item_subjects`, `contributors`, `book_contributors`, `publishers`, `publication_publishers`, `publisher_relationships`, `inventory_number_sequences`, `periodical_titles`, `inventory_price_history`, `promotions`, `promotion_items`, `acquisition_payments`, `acquisition_documents`, `website_sync_events`, `inventory_required_field_rules`, `book_isbns`, `periodical_title_relationships`, `inventory_saved_searches`, `inventory_export_templates`, `inventory_import_batches`, `inventory_import_rows`, `inventory_validation_exceptions`, `inventory_import_issues`, `inventory_duplicate_links`, `inventory_consignor_minimum_history`, `inventory_commission_agreement_assignments`
+
+**Auction — 13:** `auction_inventory_assignments`, `auctions`, `auction_sessions`, `auction_lots`, `auction_lot_items`, `auction_import_batches`, `auction_import_rows`, `auction_import_issues`, `auction_lot_changes`, `auction_catalog_versions`, `auction_launch_checklist_items`, `auction_lot_images`, `auction_lot_field_overrides`
+
+**Invoicing and payment — 12:** `buyer_invoices`, `buyer_invoice_items`, `invoice_payments`, `invoice_payment_requests`, `payment_methods`, `customer_credit_ledger`, `credit_refunds`, `invoice_refunds`, `email_templates`, `outbound_email_messages`, `invoice_reminders`, `invoice_late_charges`
+
+**Consignor settlement and commission — 10:** `consignor_settlements`, `consignor_settlement_lines`, `consignor_payouts`, `consignor_payout_allocations`, `consignor_invoice_offsets`, `customer_account_adjustments`, `consignor_commission_agreements`, `consignor_commission_tiers`, `consignor_adjustment_recoveries`, `consignor_repayments`
+
+**Inventory pulling — 2:** `inventory_pull_sessions`, `inventory_pull_session_invoices`
+
+**Auction shipping — 2:** `shipping_packages`, `shipping_package_lots`
+
+**Fulfillment exceptions — 1:** `fulfillment_exceptions`
+
+**Online sales — 9:** `online_sales`, `online_sale_items`, `online_sale_platform_fees`, `online_sale_fee_allocations`, `online_sale_fee_adjustments`, `online_sale_refunds`, `online_sale_payments`, `online_shipping_packages`, `online_shipping_package_items`
+
+**Business accounting and settings — 14:** `business_expenses`, `expense_categories`, `expense_attachments`, `payment_accounts`, `business_vehicles`, `business_trips`, `business_trip_stops`, `sales_tax_filings`, `florida_sales_tax_rates`, `bookkeeping_reminders`, `accounting_years`, `application_settings`, `financial_report_versions`, `financial_report_files`
+
+**Count:** 44 + 37 + 13 + 12 + 10 + 2 + 2 + 1 + 9 + 14 = **144**. No `customer_drafts` table: drafts persist on the local Windows device.
+
+### Approved accounting and financial controls (Findings 101–150)
+
+- Consignor overpayment recoveries, repayments, credit liabilities, supplemental payables, failed payouts, and reversals preserve finalized settlements and full audit trails; `consignor_repayments` was added in Finding 103.
+- Accounting years can be closed and reopened only with authorized reasons. Later corrections normally affect the current open period; original event dates remain intact.
+- `financial_report_versions` (Finding 118) and `financial_report_files` (Finding 121) track immutable finalized report snapshots, multi-file exports, SHA-256 checksums, protected local copies, Dropbox package synchronization, controlled delivery, version history, retention and legal holds.
+- Financial report access uses granular backend-enforced permissions for viewing, generating, downloading, finalizing, delivering, and managing reports. Revocations take effect on subsequent protected actions; audit all sensitive operations.
+- Finalized report delivery is blocked until all Dropbox package files are synchronized and checksum-verified. Local view/download during an outage is permitted for authorized users with matching protected local copies; external delivery remains blocked. Dropbox verification is on access or Administrator-initiated, not scheduled.
+- Initial financial reporting is **cash basis, pending accountant confirmation**. Preserve receipt, payment, transaction, settlement and bank deposit dates separately. Refunds and reversals are recognized according to actual cash movement dates subject to accountant-approved classification.
+- Use existing `business_expenses`, `expense_categories`, `payment_accounts`, and audit records with distinct classifications for owner contributions/withdrawals, account transfers, bank fees and interest, business loans, personal-fund reimbursements, split-funded purchases, credit card purchases and bill payments, and manual credit card statement reconciliation. Avoid double counting and do not classify principal/transfers as operating income or deductible expenses.
+- Detailed processor payout-batch reconciliation, loan amortization, automated bank/credit card imports, and accrual accounting/journal generation are deferred.
+
+### Full approved finding register (61–150)
+
+For exact decision context, consult the continuity checkpoint and prior approved conversation. The following is a concise handoff register, not a replacement for detailed approval records.
+
+- 61. Add application_users for authenticated actors and audit identity.
+- 62. Add application_roles.
+- 63. Add application_user_roles; protect last active Administrator.
+- 64. Add application_permissions with backend enforcement.
+- 65. Add application_role_permissions; default deny.
+- 66. Add application_user_preferences; customer drafts remain local.
+- 67. Add inventory_import_issues for per-row validation issues and resolution.
+- 68. Add inventory_duplicate_links; authorized reversible canonical links, legitimate copies remain distinct.
+- 69. Add auction_lot_field_overrides; preserve manual auction copy and iCollector update flag.
+- 70. Add inventory_consignor_minimum_history; item-level commitments and evidence.
+- 71. No table: minimum_basis GROSS_SALE_PRICE or NET_CONSIGNOR_PROCEEDS; verify agreement.
+- 72. No table: test each consigned item in multi-item lots against allocated proceeds and minimum.
+- 73. Add consignor_commission_agreements and consignor_commission_tiers; versioned terms.
+- 74. No table: revised agreements affect new accepted inventory by default; existing inventory needs authorized reassignment.
+- 75. Add inventory_commission_agreement_assignments; effective-dated item/channel mapping.
+- 76. Add application_settings; typed global settings, controlled financial enablement.
+- 77. No table: setting changes audited in application_audit_log.
+- 78. No table: authorized settings apply immediately; future reminders use existing mechanism.
+- 79. No table: completed sale/final settlement commission versions locked; correction by adjustment.
+- 80. No table: commission terms selected when item sells, not at lot finalization.
+- 81. No table: actual sale time selects commission version and is snapshotted.
+- 82. No table: if actual time missing, use scheduled session closing time marked ESTIMATED in America/New_York.
+- 83. No table: later discovered actual time is informational; estimated financial reference stays unless authorized contractual correction.
+- 84. No table: missing/invalid hammer blocks affected result approval, invoice and settlement until verified.
+- 85. No table: missing/ambiguous buyer blocks affected invoice; preserve sale/hammer; unaffected proceed and consignor policy unchanged.
+- 86. No table: reimports classified unchanged/new/changed/conflicting; deduplicate and preserve source batches.
+- 87. No table: conflicting sale results require authorized reconciliation; one authoritative sale per lot.
+- 88. Option B, no table: verified SOLD→UNSOLD automatically updates authoritative result; flag financial corrections, no automatic refund or retail release.
+- 89. No table: corrected UNSOLD item requires authorized location/ownership/disposition confirmation before availability change.
+- 90. No table: verified UNSOLD→SOLD automatically adopted subject to intervening inventory conflict safeguards.
+- 91. No table: verify lot-item linkage, ownership and allocations before affected financial approval/invoice/settlement.
+- 92. No table: authorized audited allocation corrections; unsettled recalculation, finalized settlement adjustment; buyer invoice unchanged.
+- 93. No table: evidence-supported historical ownership attribution correction; preserve acquisition and settlement history.
+- 94. No table: evidence-supported commission agreement/version correction; unsettled recalculation, finalized adjustment.
+- 95. No table: evidence-supported historical consignor minimum/basis correction; recheck compliance, no automatic financial changes.
+- 96. Option B, no table: minimum violations resolved via existing notes/messages/audit/adjustments, no dedicated violation table.
+- 97. Option B, no table: authorized settlement finalization despite unresolved minimum violation after documented acknowledgment; not waiver.
+- 98. No table: preserve paid statements; underpayment supplemental payable, overpayment recoverable via future offsets or repayment.
+- 99. Add consignor_adjustment_recoveries; individual partial recoveries linked to original obligation and settlement/repayment, prevent over-recovery.
+- 100. Option A, no table: reverse and replace incorrect recovery entries, never edit/delete posted recovery; preserve final financial records.
+- 101. A — Supplemental payable after reversed recovery has reduced an issued payout; preserve prior finalized transactions and original obligation.
+- 102. A — Allocate multiple consignor overpayment obligations oldest-first by default, with authorized changes/splits and no over-allocation.
+- 103. A — Add consignor_repayments; direct payments, references, allocation, clearing and reconciliation.
+- 104. A — Repayment PENDING/CLEARED/REVERSED; verified reversals and linked replacements, no duplicate reversal.
+- 105. A — Pending repayments reserve allocations provisionally, not completed recoveries; release on failure.
+- 106. A — Partial clearance: post only cleared amount, release excess reservation, preserve discrepancy and authorized allocation.
+- 107. B — Excess cleared repayment carried as consignor credit liability, usable on future payout or refundable.
+- 108. A — Apply consignor credit as positive next eligible payout component, including cross-channel, without duplication.
+- 109. A — Incorrect credit already paid: preserve payout, create recoverable obligation with evidence and audit.
+- 110. A — Refund unused consignor credit through existing consignor_payouts, with reservation and duplicate prevention.
+- 111. A — Refund PREPARED/ISSUED/CLEARED/CANCELED/FAILED states; verified failure before restoring credit.
+- 112. A — Lost ordinary consignor payout check: verify stop/void, then linked replacement; preserve settlement.
+- 113. A — Electronic payout failure/misdirection: verify provider outcome before replacement; completed misdirection needs loss/recovery handling.
+- 114. A — Track recoveries of misdirected payouts, unrecovered balances, and authorized write-offs without changing consignor payout.
+- 115. A — Recoveries after write-off recognized as linked later-period adjustment, not retroactive change.
+- 116. A — Closed-year corrections normally posted in current open period; reopening requires Administrator reason and reclosure.
+- 117. A — Late original transactions preserve original date, discovery/entry date and accounting period; accountant review.
+- 118. A — Add financial_report_versions; report metadata, draft/finalized/superseded versions, delivery lineage.
+- 119. A — Financial report snapshot/cutoff, detect source changes before finalization, immutable finalized version.
+- 120. A — Finalized export SHA-256, size, name, path, verify on access and preserve original checksums.
+- 121. A — Add financial_report_files; one record per report package file, purpose, format, path, size, checksum.
+- 122. A — Restore missing/corrupt finalized files only from matching SHA-256 evidence, with authorization and audit.
+- 123. B — Permit finalization with verified protected local files while Dropbox synchronization is pending; show separate sync status.
+- 124. A — Persistent protected local archive through Windows restart; retention cleanup only after verified Dropbox archive.
+- 125. B — Sync entire report package as a unit; failure means package failed, retry all, preserve local files.
+- 126. A — Stable unique Dropbox path per version; reuse checksum-identical files, never overwrite conflicting content.
+- 127. B — Block accountant delivery until entire Dropbox report package synchronized and SHA-256 verified.
+- 128. B — Primary report delivery metadata in financial_report_versions; subsequent attempts/deliveries in application_audit_log; no delivery table.
+- 129. A — Granular backend-enforced permissions for report view/generate/download/finalize/deliver/manage and supporting files.
+- 130. A — Revoke permissions immediately for subsequent protected actions; revalidate exports before release, block stale links.
+- 131. A — Retain completed export as controlled DRAFT if requesting user loses permission; authorized reassignment/review.
+- 132. A — Retain drafts until authorized disposal, configurable inactivity reminders, controlled cleanup and audit.
+- 133. A — Retain finalized/superseded reports indefinitely by default; authorized policy-based disposal, legal/audit holds.
+- 134. B — Hold status/reasons in financial_report_versions and detailed audit history; clear only after all obligations resolved.
+- 135. A — Detect missing/altered Dropbox files, block delivery, restore only with approval and matching SHA-256.
+- 136. B — Verify Dropbox archives on access or Administrator manual check; no scheduled background verification.
+- 137. A — During Dropbox outage allow authorized local view/download if SHA-256 verified; external delivery remains blocked.
+- 138. B — Authorized manual retry of uncertain Gmail report sends with duplicate warning and full attempt audit.
+- 139. A — Multi-year financial reports; capture year open/closed statuses, provisional labels, snapshots and cutoffs.
+- 140. A — Cash-basis reporting initially, pending accountant confirmation; preserve dates, defer accrual and journal entries.
+- 141. A — Refunds/reversals in actual cash movement period subject to accountant classification; link original, protect closed years.
+- 142. B — Track processor collection vs bank deposit in existing records; prevent double-counting, defer payout batch table.
+- 143. B — Owner contributions/withdrawals classified through business_expenses and payment_accounts, not operating income/expense.
+- 144. B — Internal account transfers as linked outgoing/incoming entries using existing records, no revenue/expense duplication.
+- 145. A — Bank fees via business_expenses/categories; interest income distinct, linked payment account and reconciled.
+- 146. A — Basic business loan tracking via existing records; principal vs interest/fees, no loan tables or amortization.
+- 147. A — Personally funded business purchases and linked partial reimbursements via existing records; no double-count.
+- 148. B — Split-funded purchases as linked business_expenses records sharing purchase reference; reconcile total.
+- 149. A — Credit card purchases distinct from later principal bill payments; interest/fees separate; reconcile statements.
+- 150. A — Manual credit card statement reconciliation using existing records; statement balances, discrepancies, approval and audit; no new table.
+
+### Open validation and design gates
+
+- Confirm cash-basis treatment, tax classification, year-end adjustments, interest and refunds with the accountant; do not enable unverified financial policies.
+- Verify Florida tax rules, card/PayPal surcharges, late charges, consent, retention and service-provider terms before implementation.
+- Resolve precise fields and integrity constraints for using `business_expenses` for non-expense cash movements and statement-level reconciliation; preserve the approved no-new-table decisions unless the owner explicitly revisits them.
+- Preserve the separate customer Q1–127 decision log. Its original Q128-on-hold reference pertains to the **customer questionnaire**, not logical reconciliation Finding 128 (approved Option B).
+- No SQL, code, integrations, or production database changes are authorized.
+
 ## Appendix A. Examples and important rules
 
 ### Mixed ownership example
@@ -329,10 +472,11 @@ This is a requirements baseline for review, not a finished design. Any contradic
 
 ## Appendix B. Revision history and approval status
 
-| Version                 | Date            | Status                                 | Summary                                                                                                                                        |
-| ----------------------- | --------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.0                     | 12 October 2026 | Superseded baseline                    | Initial consolidated requirements.                                                                                                             |
-| 2.0                     | 16 October 2026 | Owner-approved requirements baseline   | Integrated approved review decisions from Sections 19–27 into relevant sections; established schema-documentation deliverables and RBAC roles. |
-| 2.0 + Customer Addendum | 20 October 2026 | Q1–127 owner-confirmed; schema pending | Reconciled customer decisions and Q96 approval without superseding the v2.0 baseline or approving SQL/implementation.                          |
+| Version                               | Date            | Status                                                     | Summary                                                                                                                                        |
+| ------------------------------------- | --------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.0                                   | 12 October 2026 | Superseded baseline                                        | Initial consolidated requirements.                                                                                                             |
+| 2.0                                   | 16 October 2026 | Owner-approved requirements baseline                       | Integrated approved review decisions from Sections 19–27 into relevant sections; established schema-documentation deliverables and RBAC roles. |
+| 2.0 + Customer Addendum               | 20 October 2026 | Q1–127 owner-confirmed; schema pending                     | Reconciled customer decisions and Q96 approval without superseding the v2.0 baseline or approving SQL/implementation.                          |
+| 2.0 + Logical Reconciliation Addendum | 27 October 2026 | Findings 1–150 owner-confirmed; 144 working logical tables | Documented decision-level approval and outstanding physical design/implementation gates.                                                       |
 
 **Interpretation:** Explicit Version 2.0 provisions supersede conflicting Version 1.0 wording. Any remaining ambiguity must be resolved with the owner before implementation. Requested payment surcharges remain disabled pending legal, card-network, processor-contract, and tax verification.
