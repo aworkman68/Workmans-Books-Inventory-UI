@@ -1,8 +1,8 @@
 # Workman's Books
 
-**Software Requirements Specification · Version 2.0 approved baseline + customer Q1–127 and logical reconciliation Findings 1–150 addenda · 27 October 2026 · Physical schema and implementation approval pending**
+**Software Requirements Specification · Version 2.0 approved baseline + customer Q1–127 and logical reconciliation Findings 1–200 addenda · 27 October 2026 · Physical schema and implementation approval pending**
 
-Consolidated requirements baseline approved by the owner through the Section 19–27 review on 16 October 2026. This revision retains the approved Version 2.0 business requirements and adds the owner-approved logical-design decisions through Finding 150. The 144 logical table names are an approved working inventory, **not** a completed physical schema or authorization to implement. Technical architecture and implementation remain subject to separate review and approval.
+Consolidated requirements baseline approved by the owner through the Section 19–27 review on 16 October 2026. This revision retains the approved Version 2.0 business requirements and adds the owner-approved logical-design decisions through Finding 200. The 144 logical table names are an approved working inventory, **not** a completed physical schema or authorization to implement. Technical architecture and implementation remain subject to separate review and approval.
 
 ## 1. Purpose, scope, and decision status
 
@@ -10,7 +10,7 @@ Create a Windows-oriented business management application for Workman’s Books 
 
 | Approved business requirements | Items described in Sections 2–15 reflect decisions already made during planning. |
 | Proposed architecture | React/TypeScript user interface; Node.js/TypeScript services; centralized MySQL/MariaDB subject to hosting feasibility; Dropbox for media/documents. |
-| Approved design progress | 150 logical reconciliation findings and a working inventory of 144 logical tables; detailed table definitions and full logical-schema sign-off remain pending. |
+| Approved design progress | 200 logical reconciliation findings and a working inventory of 144 logical tables; detailed table definitions and full logical-schema sign-off remain pending. |
 | Not yet approved | Complete logical/physical schema, provider choice, infrastructure configuration, implementation sequencing, and deployment. |
 | Operating principle | Review and approve schema and architecture before coding or modifying GoDaddy/database resources. |
 
@@ -223,7 +223,7 @@ These are historical conceptual groupings. The approved working inventory of 144
 
 ### Additional conceptual entity candidates
 
-The following are **historical candidate** entities/relationships for schema review, not approved physical table definitions. Refer to the Findings 1–150 addendum for the current working inventory:
+The following are **historical candidate** entities/relationships for schema review, not approved physical table definitions. Refer to the Findings 1–200 addendum for the current working inventory:
 
 | Domain                 | Candidate entities or extensions                                                                                                                                                                                                                                             |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -312,9 +312,9 @@ Prefer normalized relationships, durable immutable transaction snapshots, clear 
 - All nine Version 2.0 review sections (19–27) were approved by the owner on 16 October 2026. Approval applies to business requirements and the planned design process, **not** to a logical/physical database schema, architecture deployment, API credentials, or coding.
 - Begin conceptual modeling with Customers and Inventory, review one area at a time, and obtain explicit approval before creating tables or changing production systems.
 
-## Logical schema reconciliation addendum — Findings 1–150 (27 October 2026)
+## Logical schema reconciliation addendum — Findings 1–200 (27 October 2026)
 
-**Owner-approved design decisions, not an implementation authorization.** The review paused after approval of Finding 150, Option A. Findings 1–150 are approved at the decision level; 144 logical table names have been approved as a working inventory. Table-by-table columns, constraints, relationships, ERDs, physical schema, and final sign-off remain outstanding. Continue with Finding 151 only after owner acknowledgment of the checkpoint.
+**Owner-approved design decisions, not an implementation authorization.** The review paused after approval of Finding 150, Option A. Findings 1–200 are approved at the decision level; 144 logical table names have been approved as a working inventory. Table-by-table columns, constraints, relationships, ERDs, physical schema, and final sign-off remain outstanding. Continue with Finding 201 only after owner acknowledgment of the checkpoint.
 
 ### Working logical table inventory
 
@@ -477,6 +477,70 @@ This is a requirements baseline for review, not a finished design. Any contradic
 | 1.0                                   | 12 October 2026 | Superseded baseline                                        | Initial consolidated requirements.                                                                                                             |
 | 2.0                                   | 16 October 2026 | Owner-approved requirements baseline                       | Integrated approved review decisions from Sections 19–27 into relevant sections; established schema-documentation deliverables and RBAC roles. |
 | 2.0 + Customer Addendum               | 20 October 2026 | Q1–127 owner-confirmed; schema pending                     | Reconciled customer decisions and Q96 approval without superseding the v2.0 baseline or approving SQL/implementation.                          |
-| 2.0 + Logical Reconciliation Addendum | 27 October 2026 | Findings 1–150 owner-confirmed; 144 working logical tables | Documented decision-level approval and outstanding physical design/implementation gates.                                                       |
+| 2.0 + Logical Reconciliation Addendum | 27 October 2026 | Findings 1–200 owner-confirmed; 144 working logical tables | Documented decision-level approval and outstanding physical design/implementation gates.                                                       |
 
 **Interpretation:** Explicit Version 2.0 provisions supersede conflicting Version 1.0 wording. Any remaining ambiguity must be resolved with the owner before implementation. Requested payment surcharges remain disabled pending legal, card-network, processor-contract, and tax verification.
+
+## Finding 200 continuity addendum — approved logical decisions 151–200
+
+**Status:** All Findings 151–200 approved as Option A, no additional logical tables. Total **200 approved findings / 144 logical tables**. Pause before Finding 201. The Version 2.0 SRS baseline and customer Q1–127 decisions remain intact. No SQL, implementation or physical-schema sign-off.
+
+- **Finding 151 — Option A, no new tables:** Vendor refunds and credits; preserve original expense, source, cash refunds vs future-use credits and reconciliation.
+- **Finding 152 — Option A, no new tables:** Vendor prepayments and deposits; distinguish advance assets/credits from recognized expense, reconcile applications and refunds.
+- **Finding 153 — Option A, no new tables:** Business fixed assets and disposals using existing records; acquisition, depreciation/accountant review, sale/disposal and audit.
+- **Finding 154 — Option A, no new tables:** Expense reclassification with authorized corrections and original transaction preservation.
+- **Finding 155 — Option A, no new tables:** Unpaid vendor bills tracked separately from paid expenses; cash-basis recognition remains accountant-reviewed.
+- **Finding 156 — Option A, no new tables:** Recurring expenses and expected obligations via existing records; reminders, prevent duplicate actual charges.
+- **Finding 157 — Option A, no new tables:** Vendors represented through customer roles and existing customer records; role separation and audit.
+- **Finding 158 — Option A, no new tables:** Manual vendor statement reconciliation, missing/duplicate charges and resolution history.
+- **Finding 159 — Option A, no new tables:** Duplicate vendor invoice detection and authorized exception resolution.
+- **Finding 160 — Option A, no new tables:** Expense approval workflow, permission separation and documented authorization.
+- **Finding 161 — Option A, no new tables:** Budgets using existing expense/settings/reporting records; compare planned versus actual without accounting entries.
+- **Finding 162 — Option A, no new tables:** Receipt and supporting-document requirements based on expense category, exceptions and audit.
+- **Finding 163 — Option A, no new tables:** Dropbox-managed expense attachments with version history and initial integrity verification.
+- **Finding 164 — Option A, no new tables:** Expense-document retention indefinitely by default, controlled disposal and legal/audit holds.
+- **Finding 165 — Option A, no new tables:** Accountant expense-document ZIP exports with controlled access, completeness and audit.
+- **Finding 166 — Option A, no new tables:** Accountant-recommended adjustments linked to original transaction; noncash vs cash, closed-year protection, reversals.
+- **Finding 167 — Option A, no new tables:** Vehicle mileage and expenses; historical rates, business/personal use, reimbursement vs deduction, no double count.
+- **Finding 168 — Option A, no new tables:** Mixed-purpose trips with business/personal segment mileage and documented shared-cost allocations.
+- **Finding 169 — Option A, no new tables:** Travel expenses and reimbursements; payer, partial reimbursements, substantiation and separate tax treatment.
+- **Finding 170 — Option A, no new tables:** Travel advances, documented substantiation, repayments and unresolved balances.
+- **Finding 171 — Option A, no new tables:** Canceled or partly completed travel; cancellation fees, deposits, credits, refunds and advance reconciliation.
+- **Finding 172 — Option A, no new tables:** Optional travel per diem; historical rates, eligibility, approvals and duplicate-claim prevention.
+- **Finding 173 — Option A, no new tables:** Meals and entertainment classification; attendees/purpose, receipts, deduction fraction vs actual cost.
+- **Finding 174 — Option A, no new tables:** Inventory gifts, promotional giveaways and other non-sale dispositions; ownership, cost and approval.
+- **Finding 175 — Option A, no new tables:** Damaged/lost/stolen/destroyed inventory; repair/write-off, consignor rights, insurance and audit.
+- **Finding 176 — Option A, no new tables:** Inventory restoration/conservation; service expenses, before/after condition and owner authorization.
+- **Finding 177 — Option A, no new tables:** Condition and grading history; source/assessor, revisions, publication snapshots and audit.
+- **Finding 178 — Option A, no new tables:** Authenticity, provenance and attribution; claims vs verified evidence, conflicts and inventory-linked documents.
+- **Finding 179 — Option A, no new tables:** Inventory research notes and bibliographic evidence; identifiable notes/sources and historical versions.
+- **Finding 180 — Option A, no new tables:** Cataloging review and publication approval; approvals tied to content version and repeat review cycles.
+- **Finding 181 — Option A, no new tables:** Temporary inventory reservations; history, expiration, conflict prevention and release.
+- **Finding 182 — Option A, no new tables:** Consignor returns and withdrawals; requests, approvals, custody handover and historical evidence.
+- **Finding 183 — Option A, no new tables:** Inventory storage transfers, temporary movements and location history including non-box locations.
+- **Finding 184 — Option A, no new tables:** Physical inventory counts; sessions, expected snapshots, observed results, discrepancies and approvals.
+- **Finding 185 — Option A, no new tables:** Temporary external inventory custody; custodian, permissions, handover, due date and inspection.
+- **Finding 186 — Option A, no new tables:** Inventory image versions and independent channel selections; immutable published image sets.
+- **Finding 187 — Option A, no new tables:** Multi-volume sets and components; structured component quantities, completeness and fulfillment.
+- **Finding 188 — Option A, no new tables:** Inventory splits/combinations; source-result lineage, cost allocation, ownership and sale prevention.
+- **Finding 189 — Option A, no new tables:** Channel-specific asking prices; effective periods, pricing history and realized-price separation.
+- **Finding 190 — Option A, no new tables:** Market/insurance valuations; source, methodology, date, evidence and nonaccounting treatment.
+- **Finding 191 — Option A, no new tables:** Inventory insurance claims; affected items, claims, partial recoveries and consignor allocations.
+- **Finding 192 — Option A, no new tables:** Inventory purchase offers/counteroffers; negotiation history, offer status and resulting sale linkage.
+- **Finding 193 — Option A, no new tables:** Layaway/installment sales; agreements, installment schedules, payments, inventory commitment, fulfillment restrictions and refunds.
+- **Finding 194 — Option A, no new tables:** Fixed-price returns/exchanges; authorization, physical receipt, inspection, refunds, restocking and consignor rights.
+- **Finding 195 — Option A, no new tables:** Payment disputes/chargebacks; processor references, evidence, deadlines, fees, reversals and partial recoveries.
+- **Finding 196 — Option A, no new tables:** Customer credit types, issue sources, partial redemption, refundability, restrictions and lawful expiration.
+- **Finding 197 — Option A, no new tables:** Customer account statements; authoritative transactions, opening/closing balances, available credits separately and reconciliation.
+- **Finding 198 — Option A, no new tables:** Sales tax refund adjustments; original item/jurisdiction/rate, partial refunds, filing-period review and no excess refund.
+- **Finding 199 — Option A, no new tables:** Returned-to-sender shipments; carrier status vs physical custody, inspection, linked reshipments and disposition.
+- **Finding 200 — Option A, no new tables:** Lost/damaged/misdelivered carrier claims; shipment/item links, evidence, customer remedies, partial recoveries and consignor protections.
+
+### Required final schema validation
+
+- Validate structured independent identifiers and relationships for layaway agreements/installments, return events, disputes, offers, reservations, physical counts, external custody, carrier claims and shipment returns; generic audit entries alone are not sufficient.
+- Verify financial flows are individually traceable: partial refunds, tax adjustments, credit applications, chargeback reversals, insurance/carrier recoveries, travel advances, vendor credits, consignor allocations and customer account statements.
+- Validate inventory custody, location and sale-availability state across transfers, counts, reservations, layaway, returns, split/merge, consignment withdrawals and shipment incidents.
+- Confirm version-specific review approvals, research/evidence sources, provenance documentation, image selections, valuation histories, and published catalog snapshots.
+- Preserve transaction originals, immutable finalized financial/report records, authorization, historical evidence, corrections, and audit trails. No SQL or implementation until full logical schema sign-off.
+- Accountant/legal review remains necessary for cash basis, tax filing adjustments, expenses, credit expiration, chargebacks, carrier recoveries and consignor settlements.
