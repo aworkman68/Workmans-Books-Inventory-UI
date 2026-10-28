@@ -2,7 +2,7 @@
 
 A planned business management application for **Workman's Books**, supporting the cataloging and sale of rare, vintage, and out-of-print books and related collectibles through retail sales and auctions.
 
-> **Project status — Requirements v2.0 approved; customer Questions 1–127 and application-wide logical Findings 1–250 owner-confirmed (28 October 2026); 144 working logical tables; detailed ERD/physical schema pending.** The Software Requirements Specification (SRS) **Version 2.0** is the approved business-requirements baseline. Logical schema reconciliation is paused at Finding 250; detailed table/ERD design and architecture validation remain pending. **The application has not yet been implemented.** Features described below are planned, not available for use.
+> **Project status — Requirements v2.0 approved; customer Questions 1–127 and application-wide logical Findings 1–300 owner-confirmed (28 October 2026); 144 working logical tables; detailed ERD/physical schema pending.** The Software Requirements Specification (SRS) **Version 2.0** is the approved business-requirements baseline. Logical schema reconciliation is paused at Finding 300; detailed table/ERD design and architecture validation remain pending. **The application has not yet been implemented.** Features described below are planned, not available for use.
 
 ## Project goals
 
@@ -40,7 +40,7 @@ Project documentation (proposed repository paths):
 
 - [Software Requirements Specification — Version 2.0 baseline + confirmed customer-design addendum](docs/requirements/SOFTWARE_REQUIREMENTS.md)
 - [Customer Database Master Decision Log — Questions 1–127, plus application reconciliation cross-reference](docs/decisions/CUSTOMER_DATABASE_MASTER_DECISION_LOG.md)
-- Continuity checkpoint through Finding 250: `Workmans_Books_Continuity_Checkpoint_Through_Finding_250_2026-10-28.docx` (included in this documentation package)
+- Continuity checkpoint through Finding 300: `Workmans_Books_Continuity_Checkpoint_Through_Finding_300_2026-10-28.docx` (included in this documentation package)
 
 The SRS records approved business requirements, proposed architecture, open dependencies, and the approval gates for subsequent work. Git history preserves previous document revisions.
 
@@ -48,7 +48,7 @@ The SRS records approved business requirements, proposed architecture, open depe
 
 1. **Requirements definition — Complete:** Review and approval of SRS Version 2.0.
 2. **Customer design decision consolidation — Complete:** All Questions 1–127 owner-confirmed; Question 96 Option A approved. Master Decision Log and SRS addendum reconciled. This does not approve a database schema.
-3. **Logical schema reconciliation — Paused at Finding 250:** Owner approved 250 findings and 144 working logical table names; Finding 251 is next after checkpoint acknowledgment.
+3. **Logical schema reconciliation — Paused at Finding 300:** Owner approved 300 findings and 144 working logical table names; Finding 301 is next after checkpoint acknowledgment.
 4. **Detailed schema review and approval — Pending:** Produce an overall entity-relationship diagram (ERD), smaller domain-specific ERDs, and a table-by-table schema reference with keys, fields, constraints, and business rules.
 5. **Technical architecture validation — Pending:** Verify hosting, authentication, security, integrations, backup/recovery, and deployment approach.
 6. **Implementation — Not started:** Build database and application components only after explicit design approval.
@@ -72,7 +72,7 @@ The SRS records approved business requirements, proposed architecture, open depe
 - Customer Q96 is approved: block duplicate active relationships in either direction for the same relationship type, while allowing distinct types. The separate application-wide **Finding 128** is approved Option B; do not confuse it with a future customer Q128.
 - Financial reports use versioned snapshots, protected local/Dropbox file archives, SHA-256 verification, granular backend permissions, controlled delivery, and retention/hold safeguards.
 - Cash-basis reporting is the initial model, **pending accountant confirmation**; owner transactions, internal transfers, loans, reimbursements, split payments, and credit card reconciliation use existing records with distinct classifications.
-- The 144-table working inventory and Findings 61–250 registers are documented in the SRS addendum; three tables were added after Finding 100: `consignor_repayments`, `financial_report_versions`, `financial_report_files`.
+- The 144-table working inventory and Findings 61–300 registers are documented in the SRS addendum; three tables were added after Finding 100: `consignor_repayments`, `financial_report_versions`, `financial_report_files`.
 - No SQL tables, integrations or application functionality have been implemented by these documentation updates.
 
 ## Repository status
@@ -85,7 +85,7 @@ No license is stated here. Refer to a repository `LICENSE` file if one is added.
 
 ## Historical Finding 200 continuity addendum — approved logical decisions 151–200
 
-**Historical status at Finding 200:** All Findings 151–200 approved as Option A, no additional logical tables. At that checkpoint: **200 approved findings / 144 logical tables**. The current stop is Finding 250; resume with Finding 251 only after checkpoint acknowledgment. The Version 2.0 SRS baseline and customer Q1–127 decisions remain intact. No SQL, implementation or physical-schema sign-off.
+**Historical status at Finding 200:** All Findings 151–200 approved as Option A, no additional logical tables. At that checkpoint: **200 approved findings / 144 logical tables**. The current stop is Finding 250; resume with Finding 301 only after checkpoint acknowledgment. The Version 2.0 SRS baseline and customer Q1–127 decisions remain intact. No SQL, implementation or physical-schema sign-off.
 
 - **Finding 151 — Option A, no new tables:** Vendor refunds and credits; preserve original expense, source, cash refunds vs future-use credits and reconciliation.
 - **Finding 152 — Option A, no new tables:** Vendor prepayments and deposits; distinguish advance assets/credits from recognized expense, reconcile applications and refunds.
@@ -149,7 +149,7 @@ No license is stated here. Refer to a repository `LICENSE` file if one is added.
 
 ## Finding 250 continuity addendum — approved logical decisions 201–250 (28 October 2026)
 
-**Current status:** Findings **1–250 approved**; Findings **201–250 all Option A**, **no additional tables**; **144 working logical tables**. Reconciliation paused at Finding 250. Resume with Finding 251 only after checkpoint acknowledgment. No physical schema, SQL, implementation, or production changes authorized.
+**Current status:** Findings **1–250 approved**; Findings **201–250 all Option A**, **no additional tables**; **144 working logical tables**. Reconciliation paused at Finding 300. Resume with Finding 251 only after checkpoint acknowledgment. No physical schema, SQL, implementation, or production changes authorized.
 
 - **Finding 201 — Option A, no new tables:** Carrier shipping label voids, replacements and refunds; retain original label, refund status, replacement link and audit.
 - **Finding 202 — Option A, no new tables:** Combined shipping across buyer invoices and auctions; allocate charges and package contents without duplicating fulfillment or revenue.
@@ -213,3 +213,69 @@ No license is stated here. Refer to a repository `LICENSE` file if one is added.
 - Cross-cutting: existing general-purpose audit, message, note, document, and adjustment records are not automatically sufficient to represent independently identifiable business entities. Resolve any structural gaps before final logical-schema approval; accountant/legal review remains required where applicable.
 
 **Continuity source:** `Workmans_Books_Continuity_Checkpoint_Through_Finding_250_2026-10-28.docx`; the original Version 2.0 requirements and customer Q1–127 decisions remain unchanged.
+
+---
+
+## Finding 300 continuity update — 28 October 2026
+
+### Approval and implementation gates
+
+- Findings **1–300** are approved. Findings **251–300** each selected **Option A**, with **no new logical tables**.
+- The working logical table inventory remains **144**; these are proposed logical entities, not deployed SQL tables.
+- **STOP after Finding 300**. Finding 301 has not been presented or approved. Resume only after checkpoint acknowledgment and explicit user direction.
+- All reuse decisions require **final structural validation**: independently identifiable entities, statuses, associations, versions, decisions and audit events cannot be represented only as generic notes or unstructured email threads. Resolve any gaps before physical schema approval.
+- No SQL, migrations, implementation, or production-resource changes are authorized.
+- Customer Questions Q1–127 are distinct from application-wide Findings; Finding 128 Option B is a separate approved application-wide decision.
+
+### Findings 251–300 approval register
+
+- **Finding 251 — Option A; no new tables:** Consignor temporary loans and custody. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 252 — Option A; no new tables:** Consignor trades and exchanges. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 253 — Option A; no new tables:** Consignor purchase offers and counteroffers. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 254 — Option A; no new tables:** Consignor buyouts. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 255 — Option A; no new tables:** Consignor ownership transfers. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 256 — Option A; no new tables:** Consignor returns and releases. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 257 — Option A; no new tables:** Consignor storage charges. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 258 — Option A; no new tables:** Consignor retrieval appointments. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 259 — Option A; no new tables:** Consignor inventory inspections. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 260 — Option A; no new tables:** Catalog reproduction rights and permissions. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 261 — Option A; no new tables:** Catalog authenticity and attribution. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 262 — Option A; no new tables:** Catalog bibliographic research sources. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 263 — Option A; no new tables:** Catalog editorial tasks and review. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 264 — Option A; no new tables:** Catalog proofs and final signoff. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 265 — Option A; no new tables:** Catalog distribution campaigns. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 266 — Option A; no new tables:** Catalog printing orders. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 267 — Option A; no new tables:** Printed catalog stock. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 268 — Option A; no new tables:** Catalog errata and corrections. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 269 — Option A; no new tables:** Catalog archives and public access. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 270 — Option A; no new tables:** Historical auction lot research. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 271 — Option A; no new tables:** Catalog indexes and cross-references. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 272 — Option A; no new tables:** Catalog templates and front matter. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 273 — Option A; no new tables:** Catalog generation runs and reproducibility. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 274 — Option A; no new tables:** Catalog image selection, crops and layout. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 275 — Option A; no new tables:** Accessible catalog formats. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 276 — Option A; no new tables:** Multilingual catalog translations. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 277 — Option A; no new tables:** Complimentary catalog copies. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 278 — Option A; no new tables:** Paid catalog sales. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 279 — Option A; no new tables:** Digital catalog downloads and entitlements. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 280 — Option A; no new tables:** Customer catalog requests and special orders. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 281 — Option A; no new tables:** Catalog reprints and print-on-demand. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 282 — Option A; no new tables:** Archival copies and institutional donations. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 283 — Option A; no new tables:** Catalog physical condition, damage, repair and disposal. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 284 — Option A; no new tables:** Catalog physical stock counts. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 285 — Option A; no new tables:** Catalog subscriptions and standing orders. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 286 — Option A; no new tables:** Reciprocal catalog exchanges and institutional agreements. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 287 — Option A; no new tables:** Institutional catalog loans. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 288 — Option A; no new tables:** Customer catalog reservations and waitlists. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 289 — Option A; no new tables:** Complimentary replacement catalogs. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 290 — Option A; no new tables:** Catalog publication schedules. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 291 — Option A; no new tables:** Catalog correction recipient notifications. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 292 — Option A; no new tables:** External bibliographic listings and submissions. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 293 — Option A; no new tables:** External scholarly citations and research usage. Reuse approved existing records; preserve independent operational states, source links, authorization and historical audit, subject to structural validation.
+- **Finding 294 — Option A; no new tables:** Catalog research inquiries and reference assistance. Independent inquiries; requester identity; exact edition/lot links; assignment, deadlines, evidence, partial answers, authorized responses, copyright restrictions and history.
+- **Finding 295 — Option A; no new tables:** Research reproduction requests and permission fulfillment. Independent reproduction requests and deliveries; rights and use limits; source assets, transformed derivatives, checksums, secure links, acknowledgments, replacements and fees.
+- **Finding 296 — Option A; no new tables:** Catalog digital preservation and integrity monitoring. Authoritative archival files; independent checks, SHA-256 expectations, exceptions, recoveries and migrations; catalog-specific recurring checks do not alter initial-only tax-certificate checks.
+- **Finding 297 — Option A; no new tables:** Preservation format migrations and long-term readability. Original source retention; independent conversion attempts and derivatives; software/configuration, validation, known differences, acceptance, checksums and historical pagination.
+- **Finding 298 — Option A; no new tables:** Archival package completeness and validation. Independent archival packages and assessments; required versus optional components, file/dependency validation, exception approvals, checklist versioning and separate publication integrity.
+- **Finding 299 — Option A; no new tables:** Archival access requests and controlled retrieval. Independent file-specific access requests, approvals and retrieval events; exact versions, limits, expiry, revocation, privacy and preservation failures.
+- **Finding 300 — Option A; no new tables:** Archival retention, legal holds and authorized disposition. Independent retention decisions, policy versions, legal holds, amendments/releases, approved disposition, safe deletion, storage outcomes and immutable audit evidence.
