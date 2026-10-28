@@ -1,7 +1,7 @@
 # Workman’s Books — Customer Database Master Decision Log
 
-**Status:** Customer Questions 1–127 owner-confirmed · 20 October 2026; separate application logical reconciliation Findings 1–200 approved · 27 October 2026; physical schema not approved  
-**Scope:** Customer Questions 1–127 plus cross-reference to application logical reconciliation Findings 1–200. No physical database schema or implementation approved by this document.
+**Status:** Customer Questions 1–127 owner-confirmed · 20 October 2026; separate application logical reconciliation Findings 1–250 approved · 28 October 2026; physical schema not approved  
+**Scope:** Customer Questions 1–127 plus cross-reference to application logical reconciliation Findings 1–250. No physical database schema or implementation approved by this document.
 
 > Source: owner-provided “Workman's Books DB Schema Questions 1 through 96.docx” for Questions 1–96. Questions 97–127 are reconstructed from decisions recorded in the follow-on conversation. The original Word file remains the detailed source for Questions 1–96.
 
@@ -739,13 +739,13 @@
 2. Define logical and physical constraints (including active-only uniqueness), transactional save/rollback behavior, and indexing.
 3. Define secure Dropbox integration and database/document disaster recovery and reconciliation.
 4. Validate tax eligibility rules and external integrations before implementation.
-5. Review detailed ERD/schema with owner; customer questionnaire Q128 remains separate from the approved application reconciliation Finding 128. Application reconciliation is paused at Finding 200, with Finding 151 next after checkpoint acknowledgment.
+5. Review detailed ERD/schema with owner; customer questionnaire Q128 remains separate from the approved application reconciliation Finding 128. Application reconciliation is paused at Finding 250, with Finding 251 next after checkpoint acknowledgment.
 
 ## Application-wide logical reconciliation cross-reference — 27 October 2026
 
-**Separate numbering system:** Customer Questions Q1–127 in this document are distinct from application-wide logical schema Findings 1–200. In particular, **Finding 128 is approved (Option B)** and does not resolve or supersede any earlier reference to a future customer Question Q128.
+**Separate numbering system:** Customer Questions Q1–127 in this document are distinct from application-wide logical schema Findings 1–250. In particular, **Finding 128 is approved (Option B)** and does not resolve or supersede any earlier reference to a future customer Question Q128.
 
-The owner approved application-wide Findings 1–200, including Finding 150 Option A on manual credit card statement reconciliation. The approved working inventory contains **144 logical tables**, not deployed tables. The latest continuity checkpoint is `Workmans_Books_Continuity_Checkpoint_Through_Finding_150_2026-10-27.docx`. The full inventory and detailed financial requirements addendum are in `docs/requirements/SOFTWARE_REQUIREMENTS.md`.
+The owner approved application-wide Findings 1–250, including Finding 250 Option A on inventory condition changes during custody. The approved working inventory contains **144 logical tables**, not deployed tables. The latest continuity checkpoint is `Workmans_Books_Continuity_Checkpoint_Through_Finding_250_2026-10-28.docx`. The full inventory and detailed financial requirements addendum are in `docs/requirements/SOFTWARE_REQUIREMENTS.md`.
 
 ### Additional approved tables after Finding 100
 
@@ -762,9 +762,9 @@ The owner approved application-wide Findings 1–200, including Finding 150 Opti
 - Preserve finalized invoices, settlements, historical customer identities and audit trails; use authorized corrections and linked adjustments.
 - Continue one finding at a time, with explicit approval. No SQL or implementation until the complete logical design and architecture are separately approved.
 
-## Finding 200 continuity addendum — approved logical decisions 151–200
+## Historical Finding 200 continuity addendum — approved logical decisions 151–200
 
-**Status:** All Findings 151–200 approved as Option A, no additional logical tables. Total **200 approved findings / 144 logical tables**. Pause before Finding 201. The Version 2.0 SRS baseline and customer Q1–127 decisions remain intact. No SQL, implementation or physical-schema sign-off.
+**Historical status at Finding 200:** All Findings 151–200 approved as Option A, no additional logical tables. At that checkpoint: **200 approved findings / 144 logical tables**. The current stop is Finding 250; resume with Finding 251 only after checkpoint acknowledgment. The Version 2.0 SRS baseline and customer Q1–127 decisions remain intact. No SQL, implementation or physical-schema sign-off.
 
 - **Finding 151 — Option A, no new tables:** Vendor refunds and credits; preserve original expense, source, cash refunds vs future-use credits and reconciliation.
 - **Finding 152 — Option A, no new tables:** Vendor prepayments and deposits; distinguish advance assets/credits from recognized expense, reconcile applications and refunds.
@@ -825,3 +825,70 @@ The owner approved application-wide Findings 1–200, including Finding 150 Opti
 - Confirm version-specific review approvals, research/evidence sources, provenance documentation, image selections, valuation histories, and published catalog snapshots.
 - Preserve transaction originals, immutable finalized financial/report records, authorization, historical evidence, corrections, and audit trails. No SQL or implementation until full logical schema sign-off.
 - Accountant/legal review remains necessary for cash basis, tax filing adjustments, expenses, credit expiration, chargebacks, carrier recoveries and consignor settlements.
+
+## Finding 250 continuity addendum — approved logical decisions 201–250 (28 October 2026)
+
+**Current status:** Findings **1–250 approved**; Findings **201–250 all Option A**, **no additional tables**; **144 working logical tables**. Reconciliation paused at Finding 250. Resume with Finding 251 only after checkpoint acknowledgment. No physical schema, SQL, implementation, or production changes authorized.
+
+- **Finding 201 — Option A, no new tables:** Carrier shipping label voids, replacements and refunds; retain original label, refund status, replacement link and audit.
+- **Finding 202 — Option A, no new tables:** Combined shipping across buyer invoices and auctions; allocate charges and package contents without duplicating fulfillment or revenue.
+- **Finding 203 — Option A, no new tables:** Local pickup and delivery; appointments, custody handover, proof of release, partial pickup and audit.
+- **Finding 204 — Option A, no new tables:** Customer shipping preferences; default versus transaction-specific instructions, consent and history.
+- **Finding 205 — Option A, no new tables:** Shipping address verification and corrections; preserve original invoice address and verified shipment destination.
+- **Finding 206 — Option A, no new tables:** Packed weights, dimensions and carrier adjustments; preserve measured figures, label quotes, adjustments and reconciliation.
+- **Finding 207 — Option A, no new tables:** Shipping supplies inventory; purchases, stock movements, package consumption and expense classification.
+- **Finding 208 — Option A, no new tables:** Shipment tracking and delivery evidence; carrier events, delivery confirmation, exceptions and customer notifications.
+- **Finding 209 — Option A, no new tables:** International customs documentation; declared values, contents, approvals, export restrictions and immutable shipment evidence.
+- **Finding 210 — Option A, no new tables:** Shipping insurance coverage; declared value, carrier/policy coverage, premiums, claims and limits.
+- **Finding 211 — Option A, no new tables:** Shipment holds and release; reasons, authorizations, partial holds, release prerequisites and history.
+- **Finding 212 — Option A, no new tables:** Carrier pickup/drop-off manifests; grouped packages, tender evidence, scan discrepancies and reconciliation.
+- **Finding 213 — Option A, no new tables:** Shipping quotes and approvals; estimates versus final charges, customer approval and expiry.
+- **Finding 214 — Option A, no new tables:** Split shipments and outstanding items; invoice-item/package allocation, partial dispatch, backorders and final fulfillment.
+- **Finding 215 — Option A, no new tables:** Customer shipping charges versus actual carrier/handling expense; reconcile variances without rewriting issued invoices.
+- **Finding 216 — Option A, no new tables:** Pre-fulfillment cancellations; preserve sale, payment, inventory, refund and consignor effects with approval.
+- **Finding 217 — Option A, no new tables:** Buyer nonpayment and default; notices, deadlines, authorized cancellations, inventory/consignor effects and audit.
+- **Finding 218 — Option A, no new tables:** Post-sale auction catalog corrections; preserve published versions, corrected text and buyer/consignor notification.
+- **Finding 219 — Option A, no new tables:** Published auction lot withdrawals; approvals, reasons, external update flags, inventory and financial safeguards.
+- **Finding 220 — Option A, no new tables:** Reoffering unsold, withdrawn or defaulted inventory; retain prior sale/lot history and availability checks.
+- **Finding 221 — Option A, no new tables:** Draft auction lot consolidation and division; preserve item allocations, identifiers and numbering protections.
+- **Finding 222 — Option A, no new tables:** Auction reserve versus consignor minimum; independent contractual minimum and lot reserve, with reviewed conflicts.
+- **Finding 223 — Option A, no new tables:** Unsold auction lot post-auction dispositions; manual ownership/location/retail-release decisions and audit.
+- **Finding 224 — Option A, no new tables:** External auction results import and reconciliation; stage source results, match lots, resolve conflicts and preserve provenance.
+- **Finding 225 — Option A, no new tables:** External bidder identity matching; verify ambiguous identities and preserve external identifiers without auto-merge.
+- **Finding 226 — Option A, no new tables:** Auction bidder disputes and sale-result challenges; case evidence, holds, resolution and immutable original result.
+- **Finding 227 — Option A, no new tables:** Buyer premiums and fees; versioned auction policies, line-item calculations, exceptions and audit.
+- **Finding 228 — Option A, no new tables:** Auction-specific bidder registration and approval; eligibility, conditions, verification, restrictions and history.
+- **Finding 229 — Option A, no new tables:** Bidder deposits and guarantees; receipt, application, refund, forfeiture, outstanding liability and reconciliation.
+- **Finding 230 — Option A, no new tables:** Buyer payment deadlines and extensions; policy, authorized exceptions, notices and history.
+- **Finding 231 — Option A, no new tables:** Buyer overpayments and unapplied funds; separate customer liabilities, applications, refunds and no double counting.
+- **Finding 232 — Option A, no new tables:** Payment processor fees and net bank deposits; gross receipts, fees, settlement timing and bank reconciliation.
+- **Finding 233 — Option A, no new tables:** Buyer invoice consolidation and separation across auction sessions; preserve source sales, line allocations and audit.
+- **Finding 234 — Option A, no new tables:** Auction buyer invoice delivery and acknowledgment; per-attempt recipient/channel/version, failures, confirmation versus acceptance.
+- **Finding 235 — Option A, no new tables:** Buyer invoice corrections and replacement documents; immutable original, supersession, payment/tax/consignor consequences.
+- **Finding 236 — Option A, no new tables:** Buyer invoice write-offs and uncollectible balances; authorization, partial write-offs, later recovery and accountant treatment.
+- **Finding 237 — Option A, no new tables:** Consignor settlement disputes and corrections; independent disputes, holds, evidence, supplemental payments and recoveries.
+- **Finding 238 — Option A, no new tables:** Consignor payout failures, voids and replacements; original and linked attempts, verified outcomes, no duplicate payment.
+- **Finding 239 — Option A, no new tables:** Consignor payout preferences and instructions; verified destinations, sensitive-data controls, changes and one-time overrides.
+- **Finding 240 — Option A, no new tables:** Consignor settlement statement delivery and acknowledgment; exact version, attempts, receipt versus acceptance and audit.
+- **Finding 241 — Option A, no new tables:** Consignor payout scheduling and partial disbursements; eligible/scheduled/issued/paid distinctions, holds and rescheduling.
+- **Finding 242 — Option A, no new tables:** Consignor advances against future auction proceeds; independent advances, disbursement, multi-auction recovery and balances.
+- **Finding 243 — Option A, no new tables:** Consignor reimbursable expenses; actual expense versus charge, shared allocations, partial waiver and no double allocation.
+- **Finding 244 — Option A, no new tables:** Multi-auction consignor balance reconciliation; independent settlements, cross-auction allocations, recoveries and historical balances.
+- **Finding 245 — Option A, no new tables:** Consignor settlement periods and closing controls; review checks, individual closing, exceptions, immutable finalized amounts, controlled reopening and accounting periods.
+- **Finding 246 — Option A, no new tables:** Consignor settlement reports and historical reconciliation snapshots; as-of balances, parameters, immutable report versions, restatements and access controls.
+- **Finding 247 — Option A, no new tables:** Consignor death/incapacity and legal representative authority; verified scope, holds, competing claims, ownership continuity and authorized release.
+- **Finding 248 — Option A, no new tables:** Consignment agreement renewals, amendments and termination; versioned effective terms, item/sale applicability, surviving obligations and signed evidence.
+- **Finding 249 — Option A, no new tables:** Unclaimed consignor-owned inventory after termination; notices, custody, partial returns, disputes, lawful disposition and retained ownership.
+- **Finding 250 — Option A, no new tables:** Consignor inventory condition changes during custody; intake evidence, independent observations, photos, investigation, consignor notice and catalog corrections.
+
+### Final structural validation carried forward
+
+- Shipping and fulfillment (201–215): independently identifiable label voids/replacements, cross-invoice package allocation, pickup handovers, quote approvals, customs documents, manifests, insurance, holds, split shipments and carrier cost reconciliation.
+- Auction and buyer financials (216–236): independently identifiable defaults, disputes, deposits, bidder registrations, fee policy versions, overpayments, processor deposit reconciliation, invoice version/delivery attempts, and partial write-offs/recoveries.
+- Consignor payouts and obligations (237–244): independently identifiable settlement disputes, payout attempt/replacement chains, verified payee instructions, statement deliveries, payout schedules, advances, expense allocations, and multi-auction reconciliation; prevent duplicate recognition.
+- Settlement close and reports (245–246): independent closing events, checks, exceptions, reopening history, accounting-period integrity, historical as-of reconstruction, immutable issued reports and restatement lineage.
+- Consignor authority and agreement terms (247–248): independently verified representatives and scoped authority, effective/revoked legal status, signed agreement versions and exact item/sale term references.
+- Unclaimed inventory and condition (249–250): independently identifiable return cases, notices, partial releases, legal disposition authority, intake and later condition observations, photographs, custody context and responsibility determinations.
+- Cross-cutting: existing general-purpose audit, message, note, document, and adjustment records are not automatically sufficient to represent independently identifiable business entities. Resolve any structural gaps before final logical-schema approval; accountant/legal review remains required where applicable.
+
+**Continuity source:** `Workmans_Books_Continuity_Checkpoint_Through_Finding_250_2026-10-28.docx`; the original Version 2.0 requirements and customer Q1–127 decisions remain unchanged.
