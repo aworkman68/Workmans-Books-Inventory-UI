@@ -677,3 +677,7 @@ This is a requirements baseline for review, not a finished design. Any contradic
 - **Finding 298 — Option A; no new tables:** Archival package completeness and validation. Independent archival packages and assessments; required versus optional components, file/dependency validation, exception approvals, checklist versioning and separate publication integrity.
 - **Finding 299 — Option A; no new tables:** Archival access requests and controlled retrieval. Independent file-specific access requests, approvals and retrieval events; exact versions, limits, expiry, revocation, privacy and preservation failures.
 - **Finding 300 — Option A; no new tables:** Archival retention, legal holds and authorized disposition. Independent retention decisions, policy versions, legal holds, amendments/releases, approved disposition, safe deletion, storage outcomes and immutable audit evidence.
+
+## Logical schema coverage audit (initiated 30 October 2026)
+
+The working audit register is maintained in [`docs/schema/LOGICAL_SCHEMA_COVERAGE_AUDIT.md`](../schema/LOGICAL_SCHEMA_COVERAGE_AUDIT.md). It tracks requirements-to-table evidence, structural gaps, resolutions and readiness criteria. All coverage statuses begin as **Not Reviewed**; approval of Findings 1–300 does not imply structural validation. No SQL or implementation is authorized.

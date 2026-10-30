@@ -36,6 +36,8 @@ External services under consideration include **Gmail API**, **iCollector**, **S
 
 ## Documentation
 
+- [Logical Schema Coverage Audit — Version 1.0 baseline](docs/schema/LOGICAL_SCHEMA_COVERAGE_AUDIT.md)
+
 Project documentation (proposed repository paths):
 
 - [Software Requirements Specification — Version 2.0 baseline + confirmed customer-design addendum](docs/requirements/SOFTWARE_REQUIREMENTS.md)
